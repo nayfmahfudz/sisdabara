@@ -701,7 +701,8 @@
 import axios from "axios";
 var today = new Date();
 export default {
-  el: "#app",
+  el: '#app',
+  name:"permohonan",
   data() {
     return {
       subkor: false,

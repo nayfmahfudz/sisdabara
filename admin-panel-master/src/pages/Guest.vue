@@ -1,14 +1,24 @@
 <template>
+
   <div scrollable>
     <div class="first_block">
-      <img src="@/assets/logo.svg" alt="Logo" class="w-14 flex content-center" />
-        <h2 class="w-10 text-gray-700 text-medium">SISDABRA</h2>
+      <router-view name="header"></router-view>
     </div>
     <div class="flex content-center ">
-      <div class="box ">
-          <HereMap :center="center" />
+      <div>
+      <div class="girls_gard_container">
+        <video  preload="auto" id="videoElement" controls  @canplay="updatePaused" @playing="updatePaused" @pause="updatePaused"> 
+      <source src="@/assets/kabalai.mp4" type="video/mp4">
+      <p>Sorry, there's a problem playing this video. Please try using a different browser.</p>
+  </video>
+        <!-- <img
+          class="card_1"
+          :src="cards[index % cards.length].img_url"
+          alt="Girl"
+        /> -->
+      </div>
     </div>
-  </div>
+    </div>
     <div class="flex justify-center ">
       <div class="box h-2/3 w-1/3 m-20">
         <strong>Cek Status SISDABRA</strong>
@@ -50,6 +60,7 @@ import axios from 'axios';
 import HereMap from '@/components/layouts/heremap.vue';
 export default {
   el: '#app',
+  name: "home",
   components: {
     HereMap
     // Remove the HelloWorld.vue 
@@ -57,7 +68,7 @@ export default {
   data() {
     return {
       noPemohon: "",
-      center:  { lat: -7.536064, lng: 112.238402 },
+      center: { lat: -7.536064, lng: 112.238402 },
       index: 0,
       cards: [
         {

@@ -1,9 +1,39 @@
+
+import home from "@/pages/Guest.vue";
+import map from "@/pages/map.vue";
+import cek from "@/pages/cek.vue";
+import AppHeader from "@/layouts/header.vue";
+import permohonan from "@/pages/developments/Form/formlayanan.vue";
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: () => import('@/pages/Guest.vue')
-  },
+      {
+        path: '/',
+        components: {
+          header: AppHeader,
+          default: home,
+        }
+      },
+      {
+        path: '/cek',
+        components: {
+          header: AppHeader,
+          default: cek,
+        }
+      },
+      {
+        path: '/map',
+        components: {
+          header: AppHeader,
+          default: map,
+        }
+      },
+      {
+        path: '/permohonan',
+        components: {
+          header: AppHeader,
+          default: permohonan,
+        }
+      },
+ 
   {
     path: '/login',
     name: 'login',
@@ -28,11 +58,6 @@ const routes = [
         path: 'dev/getting-started',
         name: 'dev-getting-started',
         component: () => import('@/pages/developments/GettingStarted.vue')
-      },
-      {
-        path: 'permohonan',
-        name: 'permohonan',
-        component: () => import('@/pages/developments/Form/index.vue')
       },
       {
         path: 'permohonan/:id',

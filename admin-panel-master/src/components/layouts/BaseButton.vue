@@ -1,90 +1,106 @@
 <template>
-  <button
-    :class="['button', type, { disabled }]"
-    :type="htmlType"
-    :disabled="disabled"
-  >
-    <slot></slot>
-  </button>
+    <component :is="tag"
+               :type="tag === 'button' ? nativeType: ''"
+               @click="handleClick"
+               class="btn"
+               :class="classes">
+    <span class="btn-inner--icon" v-if="$slots.icon || icon && $slots.default">
+      <slot name="icon">
+        <i :class="icon"></i>
+      </slot>
+    </span>
+        <i v-if="!$slots.default" :class="icon"></i>
+        <span class="btn-inner--text" v-if="$slots.icon || icon && $slots.default">
+          <slot>
+            {{text}}
+          </slot>
+    </span>
+        <slot v-if="!$slots.icon && !icon"></slot>
+    </component>
 </template>
-
 <script>
 export default {
+  name: "base-button",
   props: {
-    htmlType: {
+    tag: {
       type: String,
       default: "button",
-      validator: htmlType => ["button", "reset", "submit"].includes(htmlType)
+      description: "Button tag (default -> button)"
     },
     type: {
       type: String,
       default: "default",
-      validator: type => ["default", "primary", "danger"].includes(type)
+      description: "Button type (e,g primary, danger etc)"
     },
-    disabled: {
-      type: Boolean
+    size: {
+      type: String,
+      default: "",
+      description: "Button size lg|sm"
+    },
+    textColor: {
+      type: String,
+      default: "",
+      description: "Button text color (e.g primary, danger etc)"
+    },
+    nativeType: {
+      type: String,
+      default: "button",
+      description: "Button native type (e.g submit,button etc)"
+    },
+    icon: {
+      type: String,
+      default: "",
+      description: "Button icon"
+    },
+    text: {
+      type: String,
+      default: "",
+      description: "Button text in case not provided via default slot"
+    },
+    outline: {
+      type: Boolean,
+      default: false,
+      description: "Whether button style is outline"
+    },
+    rounded: {
+      type: Boolean,
+      default: false,
+      description: "Whether button style is rounded"
+    },
+    iconOnly: {
+      type: Boolean,
+      default: false,
+      description: "Whether button contains only an icon"
+    },
+    block: {
+      type: Boolean,
+      default: false,
+      description: "Whether button is of block type"
+    }
+  },
+  computed: {
+    classes() {
+      let btnClasses = [
+        { "btn-block": this.block },
+        { "rounded-circle": this.rounded },
+        { "btn-icon-only": this.iconOnly },
+        { [`text-${this.textColor}`]: this.textColor },
+        { "btn-icon": this.icon || this.$slots.icon },
+        this.type && !this.outline ? `btn-${this.type}` : "",
+        this.outline ? `btn-outline-${this.type}` : ""
+      ];
+      if (this.size) {
+        btnClasses.push(`btn-${this.size}`);
+      }
+      return btnClasses;
+    }
+  },
+  methods: {
+    handleClick(evt) {
+      this.$emit("click", evt);
     }
   }
 };
 </script>
-
-<style lang="scss" scoped>
-@import "../colors.scss";
-
-.disabled {
-  cursor: not-allowed !important;
-  background-color: $gray-100 !important;
-  border-color: $gray-400 !important;
-  opacity: 0.3;
-}
-
-.button {
-  display: block;
-  color: black;
-  outline: none;
-  cursor: pointer;
-  background: transparent;
-  border-width: 1px;
-  border-color: $gray-200;
-  box-shadow: none;
-  padding: 1rem 2rem;
-  border-radius: 0.25rem;
-  min-width: 6rem;
-  transition: all 100ms;
-}
-
-.default:hover {
-  border-color: $green-500;
-}
-
-.default:focus {
-  border-color: $green-500;
-  box-shadow: 0 0 3px $green-500;
-}
-
-.primary {
-  background-color: $green-50;
-  border-color: $green-500;
-}
-
-.primary:hover {
-  background-color: $green-100;
-}
-
-.primary:focus {
-  box-shadow: 0 0 3px $green-500;
-}
-
-.danger {
-  background-color: $red-50;
-  border-color: $red-500;
-}
-
-.danger:hover {
-  background-color: $red-100;
-}
-
-.danger:focus {
-  box-shadow: 0 0 3px $red-500;
-}
+<style>
 </style>
