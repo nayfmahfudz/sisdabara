@@ -1,74 +1,11 @@
 <template>
-    <form class="w-full max-w-lg" id="app" @submit="checkForm" method="post">
-      <div class="flex flex-wrap -mx-3 mb-6">
+    <form class="left  mx-auto w-full max-w-lg " id="app" @submit="checkForm" method="post">
+      <br>
+      <br>
+      <div class=" -mx-3 mb-6">
         <div class="w-full md:w-1px-3 mb-6 md:mb-0">
           <label
-            class="
-              block
-              uppercase
-              tracking-wide
-              text-gray-700 text-xs
-              font-bold
-              mb-2
-            "
-            for="grid-first-name"
-          >
-            Jenis Permohonan
-          </label>
-          <select
-            class="
-              block
-              appearance-none
-              w-full
-              bg-gray-200
-              border border-gray-200
-              text-gray-700
-              py-3
-              px-4
-              pr-8
-              rounded
-              leading-tight
-              focus:outline-none
-              focuorder-gray-500
-            "
-            v-model="izin"
-            @change="onChangeIzin($event)"
-            label="nama"
-            id="grid-state"
-          >
-            <option v-for="izin in izins" :value="izin.id" :key="izin.id">
-              {{ izin.nama }}
-            </option>
-          </select>
-          <div
-            class="
-              pointer-events-none
-              absolute
-              inset-y-0
-              right-0
-              flex
-              items-center
-              px-2
-              text-gray-700
-            "
-          >
-            <svg
-              class="fill-current h-4 w-4"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path
-                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-              />
-            </svg>
-          </div>
-          <p class="text-red-500 text-xs italic">{{ izinErr }}</p>
-        </div>
-      </div>
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full md:w-1px-3 mb-6 md:mb-0">
-          <label
-            class="
+            class="justify-left
               block
               uppercase
               tracking-wide
@@ -115,7 +52,7 @@
             "
             for="grid-first-name"
           >
-            Nama Pemohon
+            No KTP
           </label>
           <input
             class="
@@ -152,7 +89,7 @@
             "
             for="grid-first-name"
           >
-            No Surat Permohonan
+            E-mail
           </label>
           <input
             class="
@@ -189,7 +126,7 @@
             "
             for="grid-first-name"
           >
-            Tanggal Surat Permohonan
+            Pekerjaan
           </label>
           <input
             class="
@@ -226,7 +163,7 @@
             "
             for="grid-first-name"
           >
-            Email
+            Alamat KTP
           </label>
           <input
             class="
@@ -262,7 +199,7 @@
             "
             for="grid-first-name"
           >
-            NPWP
+            No Handphone
           </label>
           <input
             class="
@@ -298,7 +235,7 @@
             "
             for="grid-first-name"
           >
-            Lokasi
+            Nama Instansi / Tempat / Universitas
           </label>
           <input
             class="
@@ -336,7 +273,7 @@
             "
             for="grid-first-name"
           >
-            Sumber
+            Tujuan Permohonan Data
           </label>
           <input
             class="
@@ -373,7 +310,7 @@
             "
             for="grid-first-name"
           >
-            Garis Bujur
+            Catatan Data Yang di Minta
           </label>
           <input
             class="
@@ -409,7 +346,7 @@
             "
             for="grid-first-name"
           >
-            Garis Lintang
+            Foto KTP
           </label>
           <input
             class="
@@ -445,7 +382,7 @@
             "
             for="grid-first-name"
           >
-            debit liter/detik
+            Upload Surat Permohonan
           </label>
           <input
             class="
@@ -468,219 +405,7 @@
           />
         </div>
       </div>
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full md:w-1px-3 mb-6 md:mb-0">
-          <label
-            class="
-              block
-              uppercase
-              tracking-wide
-              text-gray-700 text-xs
-              font-bold
-              mb-2
-            "
-            for="grid-first-name"
-          >
-            Luas Area Tambang
-          </label>
-          <input
-            class="
-              appearance-none
-              block
-              w-full
-              bg-gray-200
-              text-gray-700
-              border border-red-500
-              rounded
-              py-3
-              px-4
-              mb-3
-              leading-tight
-              focus:outline-none focus:bg-white
-            "
-            v-model="luas"
-            type="text"
-            placeholder="Isikan Luas Area Tambang"
-          />
-        </div>
-      </div>
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full md:w-1px-3 mb-6 md:mb-0">
-          <label
-            class="
-              block
-              uppercase
-              tracking-wide
-              text-gray-700 text-xs
-              font-bold
-              mb-2
-            "
-            for="grid-first-name"
-          >
-            Komoditas
-          </label>
-          <input
-            class="
-              appearance-none
-              block
-              w-full
-              bg-gray-200
-              text-gray-700
-              border border-red-500
-              rounded
-              py-3
-              px-4
-              mb-3
-              leading-tight
-              focus:outline-none focus:bg-white
-            "
-            v-model="komoditas"
-            type="text"
-            placeholder="Isikan komoditas"
-          />
-        </div>
-      </div>
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full md:w-1px-3 mb-6 md:mb-0">
-          <label
-            class="
-              block
-              uppercase
-              tracking-wide
-              text-gray-700 text-xs
-              font-bold
-              mb-2
-            "
-            for="grid-first-name"
-          >
-            SK Menteri
-          </label>
-          <input
-            class="
-              appearance-none
-              block
-              w-full
-              bg-gray-200
-              text-gray-700
-              border border-red-500
-              rounded
-              py-3
-              px-4
-              mb-3
-              leading-tight
-              focus:outline-none focus:bg-white
-            "
-            v-model="sk"
-            type="text"
-            placeholder="Isikan SK MENTERI"
-          />
-        </div>
-      </div>
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full md:w-1px-3 mb-6 md:mb-0">
-          <label
-            class="
-              block
-              uppercase
-              tracking-wide
-              text-gray-700 text-xs
-              font-bold
-              mb-2
-            "
-            for="grid-first-name"
-          >
-            Status
-          </label>
-          <select
-            v-model="statusSelected"
-            class="
-              block
-              appearance-none
-              w-full
-              bg-gray-200
-              border border-gray-200
-              text-gray-700
-              py-3
-              px-4
-              pr-8
-              rounded
-              leading-tight
-              focus:outline-none
-              focuorder-gray-500
-            "
-            @change="onChange($event)"
-            label="nama"
-            id="grid-state"
-          >
-            <option v-for="item in status" :value="item.id" :key="item.id">
-              {{ item.nama }}
-            </option>
-          </select>
-          <div
-            class="
-              pointer-events-none
-              absolute
-              inset-y-0
-              right-0
-              flex
-              items-center
-              px-2
-              text-gray-700
-            "
-          >
-            <svg
-              class="fill-current h-4 w-4"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path
-                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
-      <div class="w-full md:w-6px-6 mb-12 md:mb-0">
-        <table class="w-full md:w-1px-3 mb-12 md:mb-0">
-          <tr>
-            <td>
-              <input
-              
-                type="checkbox"
-                id="KABIDOP"
-                value= true
-                v-model="kabidop"
-              />
   
-              <label for="KABIDOP">KABID. OP</label>
-            </td>
-            <td>
-              <input type="checkbox" id="subkor" value= true v-model="subkor" />
-              <label for="subkor">Sub.Kor Perencanaan OP</label>
-            </td>
-  
-            <td>
-              <input
-                type="checkbox"
-                id="Kabag TU"
-                value= true
-                v-model="kabagtu"
-              />
-              <label for="Kabag TU">Kabag TU</label>
-            </td>
-  
-            <td>
-              <input
-                type="checkbox"
-                id="SISDABRA"
-                value= true
-                v-model="SISDABRA"
-              />
-              <label for="SISDABRA">TIM.SISDABRA</label>
-            </td>
-          </tr>
-        </table>
-      </div>
       <br />
       <button
         class="
@@ -889,4 +614,9 @@
   };
   </script>
   
-  
+  <style>
+  .left{
+    justify-items: left;;
+    align-items: left;
+
+}</style>
