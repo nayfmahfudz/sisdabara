@@ -3,6 +3,7 @@ import home from "@/pages/Guest.vue";
 import map from "@/pages/map.vue";
 import cek from "@/pages/cek.vue";
 import AppHeader from "@/layouts/header.vue";
+import detail from "@/pages/developments/Form/detail.vue";
 import permohonan from "@/pages/developments/Form/formlayanan.vue";
 const routes = [
       {
@@ -10,6 +11,13 @@ const routes = [
         components: {
           header: AppHeader,
           default: home,
+        }
+      },
+      {
+        path: '/detail/:id',
+        components: {
+          header: AppHeader,
+          default: detail,
         }
       },
       {

@@ -30,6 +30,7 @@
     "vue-sweetalert2": "^5.0.2",
     "vue-window-size": "^1.1.2",
     "vue2-transitions": "^0.3.0",
+    "vue3-carousel": "^0.2.8",
     "vue3-cookies": "^1.0.1",
     "vue3-form-validation": "^4.1.1",
     "vue3-gmap-custom-marker": "^1.0.0"

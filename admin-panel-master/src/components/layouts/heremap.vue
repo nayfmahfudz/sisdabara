@@ -54,10 +54,10 @@ addInfoBubble(map,ui) {
   }, false);
 
   this.addMarkerToGroup(group, { lat: -8.0371683, lng: 111.5847978 },
-    '<div>Bendungan Tugu</div>');
+    '<a href="#/detail/tugu">Bendungan Tugu</a>');
 
     this.addMarkerToGroup(group, { lat: -7.4948587, lng: 111.8905152 },
-    '<div>Bendungan Sumantok</div>');
+    '<a href="#/detail/semantok">Bendungan Semantok</a>');
 },
         initializeHereMap() { // rendering map
 

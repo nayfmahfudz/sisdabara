@@ -7,8 +7,8 @@
     <div class="flex content-center ">
       <div>
       <div class="girls_gard_container">
-        <video  preload="auto" id="videoElement" controls  @canplay="updatePaused" @playing="updatePaused" @pause="updatePaused"> 
-      <source src="@/assets/kabalai.mp4" type="video/mp4">
+        <video  preload="auto" id="videoElement"  :autoplay="true" controls  @canplay="updatePaused" @playing="updatePaused" @pause="updatePaused"> 
+      <source src="@/assets/kabalai.mp4 "  type="video/mp4">
       <p>Sorry, there's a problem playing this video. Please try using a different browser.</p>
   </video>
         <!-- <img
