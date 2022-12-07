@@ -17,7 +17,21 @@
         <div class="text order-2 order-lg-1 h-100 d-lg-flex justify-content-center">
             <div class="align-self-center text-left">
                 <div class="container mx-auto p-32">
-                   
+                    <a :href=this.gmap>
+                    <button class="
+            bg-blue-500
+            hover:bg-blue-700
+            text-white
+            font-bold
+            py-2
+            px-4
+            rounded
+          ">
+            Menuju Ke Bendungan
+          </button>
+                    </a>
+          <br>
+          <br>
                             {{ data }}
                 </div>
             </div>
@@ -40,7 +54,8 @@ export default {
     data() {
         return {
             images: [],
-            data: ""
+            data: "",
+            gmap:""
         }
     },
     methods: {
@@ -66,6 +81,7 @@ export default {
     },
     created() {
         if (this.$route.params.id == "semantok") {
+            this.gmap ="https://www.google.com/maps/dir/Balai+Pengembangan+Kompetensi+PUPR+Wilayah+VI+Surabaya,+Jalan+Gayung+Kebonsari,+Gayungan,+Kota+Surabaya,+Jawa+Timur/Bendungan+Semantok,+Jalan+Nganjuk+-+Bojonegoro,+Kedungpingit,+Sambikerep,+Kabupaten+Nganjuk,+Jawa+Timur/@-7.4630005,111.9814649,10z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x2dd7fb018c78dcd9:0x5349234a6f7b4d2b!2m2!1d112.7244535!2d-7.3300989!1m5!1m1!1s0x2e7834ed17a48e85:0x82ccc4c5856660e2!2m2!1d111.8905152!2d-7.4948587?hl=id";
             this.images = ["src/assets/Semantok-48.jpg", "src/assets/Semantok-50.jpg","src/assets/Semantok-1.jpg","src/assets/Semantok-2.jpg"];
             this.data = " Bendungan Semantok terletak di Dusun Kedungpingit Desa Sambi Kerep Kecamatan Rejoso Kabupaten Nganjuk, Propinsi Jawa Timur.Bendungan terletak pada koordinat 111"
             + "0 53’ 25.68” BT dan 7" +
@@ -138,7 +154,8 @@ export default {
 "Konsultan Supervisi : PT. Caturbina Guna Persada,"+
 "PT. Arga Pasca R., PT. Wecon, KSO"       
 } else {
-    this.images = ["src/assets/Semantok-48.jpg", "src/assets/Semantok-50.jpg","src/assets/tugu-1.jpg","src/assets/tugu-2.jpg"];
+    this.gmap ="https://www.google.com/maps/dir/Balai+Pengembangan+Kompetensi+PUPR+Wilayah+VI+Surabaya,+Jalan+Gayung+Kebonsari,+Gayungan,+Kota+Surabaya,+Jawa+Timur/Bendungan+Tugu,+Jalan+Raya+Trenggalek+-+Ponorogo,+Pacar,+Nglinggis,+Kabupaten+Trenggalek,+Jawa+Timur/@-7.7234464,111.7745496,10z/data=!4m13!4m12!1m5!1m1!1s0x2dd7fb018c78dcd9:0x5349234a6f7b4d2b!2m2!1d112.7244535!2d-7.3300989!1m5!1m1!1s0x2e790e6d1aa17d65:0x27e753bf5b3b310a!2m2!1d111.5847978!2d-8.0371683?hl=id";
+    this.images = ["src/assets/tugu.jpg","src/assets/tugu-1.jpg","src/assets/tugu-2.jpg"];
     this.data=""
         }
     }

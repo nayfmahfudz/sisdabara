@@ -32,11 +32,11 @@
               leading-tight
               focus:outline-none focus:bg-white
             "
-            v-model="infrastruktur"
+            v-model="nama"
             type="text"
-            placeholder="Isikan nama Kegiatan"
+            placeholder=" Nama Lengkap"
           />
-          <p class="text-red-500 text-xs italic">{{ nameErr }}</p>
+          <p class="text-red-500 text-xs italic">{{ namaErr }}</p>
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -69,11 +69,11 @@
               leading-tight
               focus:outline-none focus:bg-white
             "
-            v-model="nama"
+            v-model="noktp"
             type="text"
-            placeholder="Isikan nama Pemohon"
+            placeholder=" No KTP"
           />
-          <p class="text-red-500 text-xs italic">{{ nameErr }}</p>
+          <p class="text-red-500 text-xs italic">{{ noktpErr }}</p>
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -106,11 +106,11 @@
               leading-tight
               focus:outline-none focus:bg-white
             "
-            v-model="no"
+            v-model="email"
             type="text"
-            placeholder="Isika Nomor Pemohon"
+            placeholder="Isika E-mail anda"
           />
-          <p class="text-red-500 text-xs italic">{{ noPemohonErr }}</p>
+          <p class="text-red-500 text-xs italic">{{ emailErr }}</p>
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -143,11 +143,11 @@
               leading-tight
               focus:outline-none focus:bg-white
             "
-            v-model="tanggalpemohon"
+            v-model="pekerjaan"
             type="text"
-            placeholder="Isikan  tanggal pemohon"
+            placeholder="  Pekerjaan Pemohon"
           />
-          <p class="text-red-500 text-xs italic">{{ tanggalErr }}</p>
+          <p class="text-red-500 text-xs italic">{{ pekerjaanErr }}</p>
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -180,10 +180,11 @@
               leading-tight
               focus:outline-none focus:bg-white
             "
-            v-model="email"
+            v-model="alamat"
             type="text"
-            placeholder="Isikan Email"
+            placeholder=" Alamat lengkap"
           />
+          <p class="text-red-500 text-xs italic">{{ alamatErr }}</p>
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -216,10 +217,11 @@
               leading-tight
               focus:outline-none focus:bg-white
             "
-            v-model="npwp"
+            v-model="handphone"
             type="text"
-            placeholder="Isikan NPWP"
+            placeholder=" No Handphone "
           />
+          <p class="text-red-500 text-xs italic">{{ handphoneErr }}</p>
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -253,11 +255,11 @@
               focus:outline-none focus:bg-white
             "
             id="grid-first-name"
-            v-model="lokasi"
+            v-model="instansi"
             type="text"
-            placeholder="Isikan Lokasi"
+            placeholder=" Instansi Anda "
           />
-          <p class="text-red-500 text-xs italic">{{ lokasiErr }}</p>
+          <p class="text-red-500 text-xs italic">{{ instansiErr }}</p>
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -290,11 +292,11 @@
               leading-tight
               focus:outline-none focus:bg-white
             "
-            v-model="sumber"
+            v-model="tujuan"
             type="text"
-            placeholder="Isika Sumber yang digunakan"
+            placeholder="Tujuan Permohonan data"
           />
-          <p class="text-red-500 text-xs italic">{{ sumberErr }}</p>
+          <p class="text-red-500 text-xs italic">{{ tujuanErr }}</p>
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -327,10 +329,11 @@
               leading-tight
               focus:outline-none focus:bg-white
             "
-            v-model="longititude"
+            v-model="catatan"
             type="text"
-            placeholder="Isikan Garis Bujur"
+            placeholder=" Catatan yang Diminta"
           />
+          <p class="text-red-500 text-xs italic">{{ catatanErr }}</p>
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -363,10 +366,11 @@
               leading-tight
               focus:outline-none focus:bg-white
             "
-            v-model="latitude"
-            type="text"
-            placeholder="Isikan latitude"
+            type="file"
+            name="ktp"
+            @change="onChange"
           />
+          <p class="text-red-500 text-xs italic">{{ ktpErr }}</p>
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -399,10 +403,11 @@
               leading-tight
               focus:outline-none focus:bg-white
             "
-            v-model="debit_liter"
-            type="text"
-            placeholder="Isikan debit liter/detik"
+            type="file"
+            name="permohonan"
+            @change="onChange"
           />
+          <p class="text-red-500 text-xs italic">{{ permohonanErr }}</p>
         </div>
       </div>
   
@@ -421,101 +426,90 @@
         Submit
       </button>
     </form>
+    <br>
+    <br>
+    <br>
   </template>
   <script>
   import axios from "axios";
-  var today = new Date();
   export default {
     el: '#app',
     name:"permohonan",
     data() {
       return {
-        subkor: false,
-        kabagtu: false,
-        SISDABRA: false,
-        kabidop: false,
-        tanggalpemohon: "",
-        luas: "",
-        komoditas: "",
-        infrastruktur: "",
-        sumber: "",
-        keterangan: "",
-        longititude: "",
-        latitude: "",
-        tujuan: "",
-        npwp: "",
-        sk: "",
-        debit_liter: "",
-        debit_m3: "",
-        lokasi: "",
-        izin: 1,
-        izins: [],
-        no: "",
-        // baru:false,
-        statusSelected: 1,
-        deskripsi: "",
         nama: "",
-        noPemohonErr: "",
-        nameErr: "",
-        tanggalErr: "",
-        lokasiErr: "",
-        sumberErr: "",
-        izinErr: "",
-        statuserr: "",
+        noktp: "",
+        pekerjaan: "",
         email: "",
-        emailerr: "",
-        modified: "",
-        status: [],
+        alamat: "",
+        handphone: "",
+        instansi: "",
+        tujuan: "",
+        catatan: "",
+        ktp: null,
+        permohonan: null,
+        namaErr: "",
+        noktpErr: "",
+        alamatErr: "",
+        pekerjaanErr: "",
+        emailErr: "",
+        handphoneErr: "",
+        instansiErr: "",
+        tujuanErr: "",
+        catatanErr: "",
+        ktpErr: "",
+        permohonanErr: "",
       };
     },
     methods: {
+      
       onChange(e) {
-        this.statusSelected = e.target.value;
-        this.modified = today;
-      },
-      onChangeIzin(e) {
-        this.izin = e.target.value;
+        const name = e.target.name,
+        file = e.target.files[0]
+  const hasName = ['permohonan', 'ktp'].includes(name)
+  if(hasName && file) {this[name] = file
+  this.$swal("Data Terupload")}
+  else   this.$swal("data error");
       },
       checkForm: function (e) {
         e.preventDefault();
         if (this.nama === "") {
-          this.nameErr = "nama pemohon is required.";
-        } else if (this.sumber === "") {
-          this.nameErr = "sumber is required.";
-        } else if (this.lokasi === "") {
-          this.lokasiErr = "lokasi pemohon is required.";
-        } else if (this.tanggalpemohon === "") {
-          this.tanggalErr = "tanggal pemohon is required.";
-        } else if (this.izin == 1) {
-          this.izinErr = "izin is required.";
-        } else {
-          const datapost = {
-            subkor: this.subkor?1:0,
-        kabagtu: this.subkor?1:0,
-        SISDABRA: this.subkor?1:0,
-        kabidop: this.subkor?1:0,
-            modified: this.modified,
-            luas: this.luas,
-            komoditas: this.komoditas,
-            infrastruktur: this.infrastruktur,
-            tanggal_pemohon: this.tanggalpemohon,
-            nama: this.nama,
-            NPWP: this.npwp,
-            no_pemohon: this.no,
-            email: this.email,
-            status: this.statusSelected,
-            deskripsi: this.deskripsi,
-            sumber: this.sumber,
-            keterangan: this.keterangan,
-            longititude: this.longititude,
-            latitude: this.latitude,
-            tujuan: this.tujuan,
-            sk: this.sk,
-            debit_liter: this.debit_liter,
-            debit_m3: this.debit_m3,
-            lokasi: this.lokasi,
-            izin: this.izin,
-          };
+          this.namaErr = "nama pemohon is required.";
+        } else if (this.noktp === "") {
+          this.noktpErr = "No KTP is required.";
+        } else if (this.email === "") {
+          this.emailErr = "E-mail pemohon is required.";
+        } else if (this.pekerjaan === "") {
+          this.pekerjaanErr = "Pekerjaan pemohon is required.";
+        } else if (this.alamat == "") {
+          this.alamatErr = "Alamat is required.";
+        } else if (this.handphone === "") {
+          this.handphoneErr = "No Handphone is required.";
+        } else if (this.instansi === "") {
+          this.instansiErr = "Instansi pemohon is required.";
+        } else if (this.tujuan === "") {
+          this.tujuanErr = "Tujuan pemohon is required.";
+        } else if (this.catatan == "") {
+          this.catatanErr = "Catatan is required.";
+        }else if (this.ktp === null) {
+          this.ktpErr = "File KTP is required.";
+        } else if (this.permohonan == null) {
+          this.permohonanErr = "File Permohonan  is required.";
+        }else {
+        //   const datapost = {
+        //     modified: this.modified,
+        //     nama: this.nama,
+        // noktp: this.noktp,
+        // pekerjaan: this.pekerjaan,
+        // email: this.email,
+        // alamat: this.alamat,
+        // handphone: this.,
+        // instansi: this.,
+        // tujuan: this.,
+        // catatan: this.,
+        // ktp: null,
+        // permohonan: null,
+        //   };
           if (!!this.$route.params.id) {
             axios
               .put(
