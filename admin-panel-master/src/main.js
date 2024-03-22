@@ -7,7 +7,7 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import Vue3VideoPlayer from '@cloudgeek/vue3-video-player'
 import '@cloudgeek/vue3-video-player/dist/vue3-video-player.css'
-
+import { LMap, LTileLayer } from "@vue-leaflet/vue-leaflet";
 const app = createApp(App)
 
 app.use(Vue3VideoPlayer);
@@ -16,4 +16,6 @@ app.use(VueCookies, {
 });
 app.use(VueSweetalert2);
 app.use(router)
+app.use(LMap)
+app.use(LTileLayer)
 app.mount('#app')

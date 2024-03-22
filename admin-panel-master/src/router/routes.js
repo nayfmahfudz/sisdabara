@@ -5,12 +5,14 @@ import cek from "@/pages/cek.vue";
 import AppHeader from "@/layouts/header.vue";
 import detail from "@/pages/developments/Form/detail.vue";
 import permohonan from "@/pages/developments/Form/formlayanan.vue";
+import openstreetmap from "@/components/layouts/openstreetmap.vue";
 const routes = [
       {
         path: '/',
         components: {
-          header: AppHeader,
-          default: home,
+          // header: AppHeader,
+          default: openstreetmap,
+          
         }
       },
       {
