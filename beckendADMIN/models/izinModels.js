@@ -3,7 +3,7 @@ let db = require("../config/config.js");
 var date = new Date();
 // Get All Products
 exports.getizin = (result) => {
-    db.db.query("SELECT * FROM izin", (err, results) => {             
+    db.db.query("SELECT * FROM survey", (err, results) => {             
         if(err) {
             console.log(err);
             result(err, null);

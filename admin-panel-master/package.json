@@ -1,13 +1,10 @@
 {
   "name": "admin-panel",
   "version": "0.0.1",
-  "author": {
-    "name": "Nur Muhammad",
-    "website": "ngekoding.github.io"
-  },
   "scripts": {
     "prepare": "husky install",
-    "dev": "vite & nodemon ../beckendADMIN/app.js  --watch server",
+    "front": "vite ",
+    "back": "nodemon ../beckendADMIN/app.js ",
     "build": "vite build",
     "serve": "vite preview"
   },

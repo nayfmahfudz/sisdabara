@@ -42,7 +42,7 @@ router.put('/status/:id', updateStatus);
  
 // Delete Permohonan
 router.delete('/status/:id', deleteStatus);
-router.get('/izin', showIzin);
+router.get('/laporan', showIzin);
  
 // Get Single Permohonan
 router.get('/izin/:id', showIzinById);

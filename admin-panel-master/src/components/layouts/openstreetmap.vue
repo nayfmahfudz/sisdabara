@@ -1,16 +1,7 @@
 <template>
   <div
-    class="fixed top-20 left-0 lg:left-8 right-52 justify-items-start text-left justify-start bg-white row border-gray-200 flex flex-row items-start justify-between px-5">
-    <h1 id="list5">
-    </h1>
-    <h1 id="list1">
-    </h1>
-    <h2 id="list2">
-    </h2>
-    <h3 id="list3">
-    </h3>
-    <h4 id="list4">
-    </h4>
+    class="fixed  left-0 lg:left-8 right-52 justify-items-start text-left justify-start bg-white row border-gray-200 flex flex-row items-start justify-between px-5">
+    
 
     <!-- <h3 class="text-sm font-medium text-gray-600">Welcome, Admin</h3> -->
     <!-- <div class="flex"> -->
@@ -24,8 +15,8 @@
       </div> -->
     <!-- </div> -->
   </div>
-  <div id="mapContainer" class="fixed top-60 " style=" width: 100vw;
-  height: 70vh;"></div>
+  <div id="mapContainer" class="fixed  " style=" width: 100vw;
+  height: 100vh;"></div>
 </template>
   
 <script>
@@ -92,17 +83,25 @@ export default {
     
       for (let y = 0; y < res.length; y++) {
         var markerOptions = {
-          title: res[y].properties.Lokasi_Kejadian,
+          title: res[y].jenis_kejadian,
           opacity: 1
         }
-      
-        titik.push([res[y].geometry.coordinates[1], res[y].geometry.coordinates[0]])
-        var marker = L.marker([res[y].geometry.coordinates[1], res[y].geometry.coordinates[0]], markerOptions);
-        datawindy[y] = await windy(res[y].geometry.coordinates[1], res[y].geometry.coordinates[0]);
+        var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const hari = new Date(res[y].tanggal).toLocaleString("id-ID", options);
+        const popupContent = 
+       ` <p>Nama Surveyor:${res[y].nama_Petugas}</p>`+
+       ` <p>Kota:${res[y].desa}</p>`+
+       ` <p>Hari:${hari} </p>`+
+       ` <p>Jam :${res[y].tanggal}</p>`   +
+       ' <a href="https://www.google.com" class="tombol-google" target="_blank">Detail</a>';
+
+        titik.push([res[y].latitude	, res[y].longtitude	])
+        var marker = L.marker([res[y].latitude	, res[y].longtitude	], markerOptions).bindPopup(popupContent);
+        datawindy[y] = await windy(res[y].latitude, res[y].longtitude	);
         console.log(datawindy[y]);
         marker.addTo(this.map).on('click', function (e) {
-          var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-          const hari = new Date(res[y].properties.Tanggal_Kejadian).toLocaleString("id-ID", options);
+         
+        
           let list5 = document.getElementById("list5");
           let list1 = document.getElementById("list1");
           let list2 = document.getElementById("list2");
@@ -138,23 +137,22 @@ export default {
         <li>tertingi ${tertinggi2}/mm pada ${jam2} </li>
         <li>status : ${statushujan(harian2)}</li>
       </ul>`;
-          list2.innerHTML = ` <ul class="fixed top-28 ">
-            <img  style=" width: 10vw; height: 10vh;" src="${res[y].properties.Dokumentasi_Kejadian}" />
-      </ul>`;
-      list3.innerHTML = ` <ul class="fixed top-28 ">
-            <img  style=" width: 10vw; height: 10vh;" src="${res[y].properties['3d60e511-172d-4857-8a0e-e52f6daf8016']}" />
-      </ul>`;
-      list4.innerHTML = ` <ul class="fixed top-28 ">
+      //     list2.innerHTML = ` <ul class="fixed top-28 ">
+      //       <img  style=" width: 10vw; height: 10vh;" src="${res[y].properties.Dokumentasi_Kejadian}" />
+      // </ul>`;
+      // list3.innerHTML = ` <ul class="fixed top-28 ">
+      //       <img  style=" width: 10vw; height: 10vh;" src="${res[y].properties['3d60e511-172d-4857-8a0e-e52f6daf8016']}" />
+      // </ul>`;
+      // list4.innerHTML = ` <ul class="fixed top-28 ">
           
           
-            <img style=" width: 10vw; height: 10vh;" src="${res[y].properties['a38c6b88-fb1f-46e3-8781-41b62af86023']}" />
-      </ul>`;
+      //       <img style=" width: 10vw; height: 10vh;" src="${res[y].properties['a38c6b88-fb1f-46e3-8781-41b62af86023']}" />
+      // </ul>`;
           list1.innerHTML = ` <ul class="fixed top-28 ">
-        <li>Nama Surveyor:${res[y].properties.Nama_SurveyorResponden}</li>
-        <li>Kota:${res[y].properties.KabupatenKota}</li>
+        <li>Nama Surveyor:${res[y].nama_Petugas}</li>
+        <li>Kota:${res[y].desa}</li>
         <li>Hari:${hari} </li>
-        <li>Jam :${res[y].properties.Waktu_Kejadian}</li>
-        <li>Lokasi:${res[y].properties.Lokasi_Kejadian}</li>
+        <li>Jam :${res[y].tanggal}</li>
       </ul>`
         });
       }
@@ -285,10 +283,10 @@ let insertCH = async () => {
         "Access-Control-Allow-Credentials": "false",
       }
     };
-    return await axios.get(`https://geoserver.mapid.io/moneys/get_layer_detail_by_id/613ebfa89f8d1d0e3aac9e2e/613d96263a27ed0e2ecf8a6e`, config).then(response => {
+    return await axios.get(`http://199.99.99.4:8000/laporan`).then(response => {
 
 
-      return response.data.geojson.features;
+      return response.data;
     });
 
 
@@ -387,30 +385,3 @@ let windy = async (lat,lon) => {
   background-size: contain;
 }
 </style>
-
-
-<!-- if ((($koordi['latitude'] < $y) && ($koordj['latitude'] >= $y)) || (($koordj['latitude'] < $y) && ($koordi['latitude'] >=
-                $y)))
-            {
-                if ($koordi['longitude'] + ($y - $koordi['latitude']) / ($koordj['latitude'] - $koordi['latitude']) * ($koordj['longitude'] -
-                    $koordi['longitude']) < $x)
-                {
-                    $oddNodes = !$oddNodes;
-                }
-            } -->
-<!-- await fetch("src/components/layouts/Polygon Thiessen_Repair.geojson").then(res => res.json()).then(async data => {
-  // add GeoJSON layer to the map once the file is loaded
-  // await L.geoJSON(data, { color: "red" , opacity: 0.1}).addTo(this.map);
-  // await data.features.forEach(async (item, index) => {
-  //   if (item.properties.Zonasi == "Wilayah I") {
-  //     await L.geoJSON(item, { color: "blue" }).addTo(this.map);
-  //   } else if (item.properties.Zonasi == "Wilayah II") {
-  //     await L.geoJSON(item, { color: "green" }).addTo(this.map);
-  //   } else if (item.properties.Zonasi == "Wilayah IV") {
-  //     await L.geoJSON(item, { color: "orange" }).addTo(this.map);
-  //   } else {
-  //     await L.geoJSON(item, { color: "red" }).addTo(this.map);
-  //   }
-  // });
-
-}); -->
