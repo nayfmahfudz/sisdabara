@@ -87,13 +87,14 @@ export default {
           opacity: 1
         }
         var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        const hari = new Date(res[y].tanggal).toLocaleString("id-ID", options);
+        const hari = new Date(res[y].tanggal);
         const popupContent = 
-       ` <p>Nama Surveyor:${res[y].nama_Petugas}</p>`+
-       ` <p>Kota:${res[y].desa}</p>`+
-       ` <p>Hari:${hari} </p>`+
-       ` <p>Jam :${res[y].tanggal}</p>`   +
-       ' <a href="https://www.google.com" class="tombol-google" target="_blank">Detail</a>';
+       ` <p style="font-family:verdana">Nama Surveyor:${res[y].nama_Petugas}</p>`+
+       ` <p style="font-family:verdana">Kota:${res[y].desa}</p>`+
+       ` <p style="font-family:verdana">Hari:${hari.toLocaleString("id-ID", options)} </p>`+
+       ` <p style="font-family:verdana">Jam :${hari.toLocaleTimeString()}</p>`   +
+       ` <p style="font-family:verdana">jenis kejadian :${res[y].jenis_kejadian}</p>`   +
+       `<a href="http://199.99.99.4:4000/#/detail/${1}"  class="tombol-google" target="_blank">Detail</a>`;
 
         titik.push([res[y].latitude	, res[y].longtitude	])
         var marker = L.marker([res[y].latitude	, res[y].longtitude	], markerOptions).bindPopup(popupContent);
